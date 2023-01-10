@@ -177,7 +177,7 @@ export class PersistExtension implements Extension {
     const trimmed = (body() as string).replace(/^\n/, '');
 
     return new nunjucks.runtime.SafeString(
-      `%% begin ${id} %%${retained}${trimmed}%% end ${id} %%`
+      `%% begin ${id} %%` + (retained != '' && id[0] == '*' ? `${retained}` : `${retained}${trimmed}`) + `%% end ${id} %%`
     );
   }
 
